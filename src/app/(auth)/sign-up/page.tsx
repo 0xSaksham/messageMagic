@@ -8,14 +8,12 @@ import { useEffect, useState } from "react";
 import { useDebounceCallback } from "usehooks-ts";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
-import { signInSchema } from "@/schemas/signInSchema";
 import axios, { AxiosError } from "axios";
 import { ApiResponse } from "@/types/ApiResponse";
 import { signUpSchema } from "@/schemas/signUpSchema";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -27,7 +25,7 @@ import { Loader2 } from "lucide-react";
 
 // functionality first, UI later
 
-const page = () => {
+export default function SignUpForm() {
   // debouncing for unique username to avoid a lot of requests
   const [username, setUsername] = useState("");
   const [usernameMessage, setUsernameMessage] = useState("");
@@ -197,6 +195,4 @@ const page = () => {
       </div>
     </div>
   );
-};
-
-export default page;
+}

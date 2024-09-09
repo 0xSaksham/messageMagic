@@ -1,3 +1,4 @@
+import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/dbConnect';
 import UserModel from '@/model/User';
 import { z } from 'zod';
@@ -7,20 +8,19 @@ const UsernameQuerySchema = z.object({
   username: usernameValidation,
 });
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   await dbConnect();
 
   try {
-    const { searchParams } = new URL(request.url);
     const queryParams = {
-      username: searchParams.get('username'),
+      username: request.nextUrl.searchParams.get('username'),
     };
 
     const result = UsernameQuerySchema.safeParse(queryParams);
 
     if (!result.success) {
       const usernameErrors = result.error.format().username?._errors || [];
-      return Response.json(
+      return NextResponse.json(
         {
           success: false,
           message:
@@ -40,7 +40,7 @@ export async function GET(request: Request) {
     });
 
     if (existingVerifiedUser) {
-      return Response.json(
+      return NextResponse.json(
         {
           success: false,
           message: 'Username is already taken',
@@ -49,7 +49,7 @@ export async function GET(request: Request) {
       );
     }
 
-    return Response.json(
+    return NextResponse.json(
       {
         success: true,
         message: 'Username is unique',
@@ -58,7 +58,7 @@ export async function GET(request: Request) {
     );
   } catch (error) {
     console.error('Error checking username:', error);
-    return Response.json(
+    return NextResponse.json(
       {
         success: false,
         message: 'Error checking username',

@@ -4,7 +4,8 @@ import './globals.css';
 import AuthProvider from '../context/AuthProvider';
 import { Toaster } from '@/components/ui/toaster';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+
 
 export const metadata: Metadata = {
   title: 'True Feedback',
@@ -27,4 +28,3 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     </html>
   );
 }
-

@@ -12,11 +12,19 @@ export async function GET(request: NextRequest) {
   await dbConnect();
 
   try {
-    const queryParams = {
-      username: request.nextUrl.searchParams.get('username'),
-    };
+    const usernameParam = request.nextUrl.searchParams.get('username');
 
-    const result = UsernameQuerySchema.safeParse(queryParams);
+    if (!usernameParam) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: 'Username is required',
+        },
+        { status: 400 }
+      );
+    }
+
+    const result = UsernameQuerySchema.safeParse({ username: usernameParam });
 
     if (!result.success) {
       const usernameErrors = result.error.format().username?._errors || [];

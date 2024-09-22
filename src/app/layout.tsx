@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 
 export const metadata: Metadata = {
-  title: 'True Feedback',
+  title: 'Message Magic',
   description: 'Real feedback from real people.',
 };
 

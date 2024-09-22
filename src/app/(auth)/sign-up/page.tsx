@@ -102,7 +102,7 @@ export default function SignUpForm() {
       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
         <div className="text-center">
           <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
-            Join True Feedback
+            Join Message Magic
           </h1>
           <p className="mb-4">Sign up to start your anonymous adventure</p>
         </div>
@@ -124,11 +124,10 @@ export default function SignUpForm() {
                   {isCheckingUsername && <Loader2 className="animate-spin" />}
                   {!isCheckingUsername && usernameMessage && (
                     <p
-                      className={`text-sm ${
-                        usernameMessage === 'Username is unique'
+                      className={`text-sm ${usernameMessage === 'Username is unique'
                           ? 'text-green-500'
                           : 'text-red-500'
-                      }`}
+                        }`}
                     >
                       {usernameMessage}
                     </p>
@@ -185,4 +184,3 @@ export default function SignUpForm() {
     </div>
   );
 }
-
